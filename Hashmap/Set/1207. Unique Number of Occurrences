@@ -1,20 +1,39 @@
-import java.util.HashMap;
-import java.util.HashSet;
-
-public class Solution {
+class Solution {
     public boolean uniqueOccurrences(int[] arr) {
-        HashMap<Integer, Integer> countMap = new HashMap<>();
-        HashSet<Integer> uniqueCounts = new HashSet<>();
-        // Count the occurrences of each element
-        for (int num : arr) 
-            countMap.put(num, countMap.getOrDefault(num, 0) + 1);
-        
-        // Check if all occurrence counts are unique
-        for (int count : countMap.values()) {
-            if (!uniqueCounts.add(count)) {
-                return false; // If a count is not unique, return false
+        int[] numberOfOccurrences = new int[2001];
+        boolean[] used = new boolean[1001];
+        for (int i : arr) {
+            numberOfOccurrences[1000 + i]++;
+        }
+        for (int i : arr) {
+            int count = numberOfOccurrences[1000 + i]; 
+            numberOfOccurrences[1000 + i] = 0; 
+            if (count > 0) {
+                if (used[count]) return false;
+                else used[count] = true;
             }
         }
-        return true; // If all counts are unique, return true
+        return true;
     }
 }
+
+// import java.util.HashMap;
+// import java.util.HashSet;
+
+// public class Solution {
+//     public boolean uniqueOccurrences(int[] arr) {
+//         HashMap<Integer, Integer> countMap = new HashMap<>();
+//         HashSet<Integer> uniqueCounts = new HashSet<>();
+//         // Count the occurrences of each element
+//         for (int num : arr) 
+//             countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+        
+//         // Check if all occurrence counts are unique
+//         for (int count : countMap.values()) {
+//             if (!uniqueCounts.add(count)) {
+//                 return false; // If a count is not unique, return false
+//             }
+//         }
+//         return true; // If all counts are unique, return true
+//     }
+// }
